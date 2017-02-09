@@ -97,7 +97,8 @@ namespace Project2
             double scaling = Math.Tan(angleRadians);
             _viewVector = (_viewVector - _xVector * scaling).UnitVector();
 
-            //_upVector = (_upVector - _xVector * scaling).UnitVector();
+            double upScaling = Function.DotProduct(_upVector, scaling * _xVector);
+            _upVector = (_upVector - _xVector * upScaling).UnitVector();
             ConfigureScreenVectors();
             ResetScreen();
         }
@@ -108,7 +109,8 @@ namespace Project2
             double scaling = Math.Tan(angleRadians);
             _viewVector = (_viewVector + _xVector * scaling).UnitVector();
 
-            //_upVector = (_upVector + _xVector * scaling).UnitVector();
+            double upScaling = Function.DotProduct(_upVector, scaling * _xVector);
+            _upVector = (_upVector + _xVector * upScaling).UnitVector();
             ConfigureScreenVectors();
             ResetScreen();
         }

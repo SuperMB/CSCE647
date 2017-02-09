@@ -140,18 +140,18 @@ namespace Project2
             plane.SetColor(new Color(1, 1, 0));
             _shapes.Add(plane);
 
-            //int numberOfSpheres = 3;
-            //Random random = new Random();
-            //for(int i = 0; i < numberOfSpheres; i++)
-            //{
-            //    Point sphereCenter = new Point(-900 + random.Next(0,1900), -900 + random.Next(0, 1900), -1500 + random.Next(0,1100));
-            //    Sphere sphere = new Sphere(sphereCenter, random.Next(50,300));
-            //    sphere.SetColor(new Color(random.NextDouble(), random.NextDouble(), random.NextDouble()));
-            //    _shapes.Add(sphere);
+            int numberOfSpheres = 3;
+            Random random = new Random();
+            for(int i = 0; i < numberOfSpheres; i++)
+            { 
+                Point sphereCenter = new Point(-900 + random.Next(0,1900), -900 + random.Next(0, 1900), -500 + random.Next(0,300));
+                sphere = new Sphere(sphereCenter, random.Next(50,300));
+                sphere.SetColor(new Color(random.NextDouble(), random.NextDouble(), random.NextDouble()));
+                _shapes.Add(sphere);
 
-            //}
+            }
 
-            _moveAmount = 100;
+            _moveAmount = 400;
             //Render();
             Application app = new Application();
             app.Run();
