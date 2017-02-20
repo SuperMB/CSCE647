@@ -116,11 +116,36 @@ namespace Project2
             //Create Complex, leave the following function uncommented
             //CreateComplex();
 
-            Point centerPoint = new Point(500, 200, -600);
+            Point centerPoint;
             //Point sphereCenter = new Point(500, 200, -600);
-            Sphere sphere = new Sphere(centerPoint, 300);
+            Sphere sphere;
+
+            //Point centerPoint = new Point(500, 200, -600);
+            ////Point sphereCenter = new Point(500, 200, -600);
+            //Sphere sphere = new Sphere(centerPoint, 300);
+            //sphere.SetColor(new Color(0, 1, 0));
+            //_shapes.Add(sphere);
+
+            centerPoint = new Point(100, 300, -200);
+            //Point sphereCenter = new Point(500, 200, -600);
+            sphere = new Sphere(centerPoint, 200);
+            sphere.SetColor(new Color(.5, 1, .2));
+            _shapes.Add(sphere);
+
+            centerPoint = new Point(300, 700, -300);
+            //Point sphereCenter = new Point(500, 200, -600);
+            sphere = new Sphere(centerPoint, 100);
+            sphere.SetColor(new Color(.4, 1, .3));
+            _shapes.Add(sphere);
+
+            centerPoint = new Point(500, 200, -600);
+            //Point sphereCenter = new Point(500, 200, -600);
+            sphere = new Sphere(centerPoint, 300);
             sphere.SetColor(new Color(0, 1, 0));
             _shapes.Add(sphere);
+
+
+
 
             //Point planePoint = new Point(500, 200, -600);
             Vector planeVector = new Vector(1, 0, 0);
@@ -139,18 +164,7 @@ namespace Project2
             plane = new Plane(centerPoint, planeVector);
             plane.SetColor(new Color(1, 1, 0));
             _shapes.Add(plane);
-
-            int numberOfSpheres = 3;
-            Random random = new Random();
-            for(int i = 0; i < numberOfSpheres; i++)
-            { 
-                Point sphereCenter = new Point(-900 + random.Next(0,1900), -900 + random.Next(0, 1900), -500 + random.Next(0,300));
-                sphere = new Sphere(sphereCenter, random.Next(50,300));
-                sphere.SetColor(new Color(random.NextDouble(), random.NextDouble(), random.NextDouble()));
-                _shapes.Add(sphere);
-
-            }
-
+            
             _moveAmount = 400;
             //Render();
             Application app = new Application();
@@ -279,6 +293,16 @@ namespace Project2
             }
 
         }
+        
+        static void SaveImage()
+        {
+            using (FileStream file = new FileStream("image.png", FileMode.Create))
+            {
+                PngBitmapEncoder pngBitmapEncoder = new PngBitmapEncoder();
+                pngBitmapEncoder.Frames.Add(BitmapFrame.Create(writeableBitmap));
+                pngBitmapEncoder.Save(file);
+            }
+        }
 
         static void KeyPress(object sender, KeyEventArgs e)
         {
@@ -287,12 +311,6 @@ namespace Project2
                 //Thread thread = new Thread(new ThreadStart(Render));
                 //thread.Start();
                 Render();
-                using (FileStream file = new FileStream("image.png", FileMode.Create))
-                {
-                    PngBitmapEncoder pngBitmapEncoder = new PngBitmapEncoder();
-                    pngBitmapEncoder.Frames.Add(BitmapFrame.Create(writeableBitmap));
-                    pngBitmapEncoder.Save(file);
-                }
             }
             else if(e.Key == Key.LeftShift)
             {
@@ -347,6 +365,10 @@ namespace Project2
             {
                 _camera.TiltLeft(15);
                 Render();
+            }
+            else if (e.Key == Key.Space)
+            {
+                SaveImage();
             }
         }
 
