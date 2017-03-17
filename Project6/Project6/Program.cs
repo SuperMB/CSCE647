@@ -9,7 +9,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace Project5
+namespace Project6
 {
     class Program
     {
@@ -93,7 +93,7 @@ namespace Project5
             //Vector vector1 = new Vector(0, 1, 0);
             //screen = new Screen(w.ActualWidth, w.ActualHeight, screenPoint, vector0, w.ActualWidth, vector1, w.ActualHeight);
 
-            Point cameraPoint = new Point(0, 0, 500);
+            Point cameraPoint = new Point(0, 0, 1500);
             Vector viewVector = new Vector(0, 0, -1);
             Vector upVector = new Vector(0, 1, 0);
             double screenDistance = 400;
@@ -113,85 +113,91 @@ namespace Project5
             _antiAliasYValues = 1;// 2;
             SetAntiAlias();
 
-            double pokeballRadius = 150;
-            double pokeballY = -450;
-            Point center = new Point(0, 0, -600);
+            //double pokeballRadius = 150;
+            //double pokeballY = -450;
+            //Point center = new Point(0, 0, -600);
 
-            Point greatballCenter = new Point(-500, pokeballY, -600);
-            Vector greatballUpVector = new Vector(0, 1, 0);
-            Vector greatballOutVector = new Vector(2, -1, 3);
-            Pokeball greatball = new Pokeball(
-                greatballCenter, 
-                pokeballRadius,
-                greatballUpVector,
-                greatballOutVector,
-                new ImageData("GreatBallScratch.png"),
-                new ImageData("PokeballNormalMapTopScratch.png"),
-                new ImageData("PokeballNormalMapBottom.png")
+            //Point greatballCenter = new Point(-500, pokeballY, -600);
+            //Vector greatballUpVector = new Vector(0, 1, 0);
+            //Vector greatballOutVector = new Vector(2, -1, 3);
+            //Pokeball greatball = new Pokeball(
+            //    greatballCenter, 
+            //    pokeballRadius,
+            //    greatballUpVector,
+            //    greatballOutVector,
+            //    new ImageData("GreatBallScratch.png"),
+            //    new ImageData("PokeballNormalMapTopScratch.png"),
+            //    new ImageData("PokeballNormalMapBottom.png")
+            //    );
+            //_pokeball = greatball;
+            ////_shapes.Add(greatball);
+            ////_intersectingShapes.Add(greatball.Sphere);
+            ////_intersectingShapes.Add(greatball.Dot);
+
+            //Vector pokeballPerpendicularVector = Function.CrossProduct(greatball.OutVector, greatball.UpVector).UnitVector();
+
+
+            //Point ultraballCenter = new Point(700, pokeballY, -800);
+            //Vector ultraballUpVector = new Vector(0, 1, 3);
+            //Vector ultraballOutVector = new Vector(-7, 2, 6);
+            //Pokeball ultraball = new Pokeball(
+            //    ultraballCenter,
+            //    pokeballRadius,
+            //    ultraballUpVector,
+            //    ultraballOutVector,
+            //    new ImageData("UltraBall.png"),
+            //    new ImageData("PokeballNormalMapTop.png"),
+            //    new ImageData("PokeballNormalMapBottom.png")
+            //    );
+            ////_shapes.Add(ultraball);
+            ////_intersectingShapes.Add(ultraball.Sphere);
+            ////_intersectingShapes.Add(ultraball.Dot);
+
+
+            //Point masterballCenter = new Point(-400, pokeballY, -1200);
+            //Vector masterballUpVector = new Vector(1, 4, 0);
+            //Vector masterballOutVector = new Vector(3, -2, 6);
+            //Pokeball masterball = new Pokeball(
+            //    masterballCenter,
+            //    pokeballRadius,
+            //    masterballUpVector,
+            //    masterballOutVector,
+            //    new ImageData("MasterBall.png"),
+            //    new ImageData("PokeballNormalMapTop.png"),
+            //    new ImageData("PokeballNormalMapBottom.png")
+            //    );
+            ////_shapes.Add(masterball);
+            ////_intersectingShapes.Add(masterball.Sphere);
+            ////_intersectingShapes.Add(masterball.Dot);
+
+            //Point pokeballCenter = new Point(200, pokeballY, -400);
+            //Vector pokeballUpVector = new Vector(-5, 1, 0);
+            //Vector pokeballOutVector = new Vector(3, 0, 10);
+            //Pokeball pokeball = new Pokeball(
+            //    pokeballCenter,
+            //    pokeballRadius,
+            //    pokeballUpVector,
+            //    pokeballOutVector,
+            //    new ImageData("MasterBall.png"),
+            //    new ImageData("PokeballNormalMapTop.png"),
+            //    new ImageData("PokeballNormalMapBottom.png"),
+            //    true
+            //    );
+            ////_shapes.Add(pokeball);
+            ////_intersectingShapes.Add(pokeball.Sphere);
+            ////_intersectingShapes.Add(pokeball.Dot);
+
+
+
+
+            Point center = new Point(0, 0, -500);
+            Sphere sphere = new Sphere(
+                center,
+                300
                 );
-            _pokeball = greatball;
-            _shapes.Add(greatball);
-            _intersectingShapes.Add(greatball.Sphere);
-            _intersectingShapes.Add(greatball.Dot);
-
-            Vector pokeballPerpendicularVector = Function.CrossProduct(greatball.OutVector, greatball.UpVector).UnitVector();
-
-
-            Point ultraballCenter = new Point(700, pokeballY, -800);
-            Vector ultraballUpVector = new Vector(0, 1, 3);
-            Vector ultraballOutVector = new Vector(-7, 2, 6);
-            Pokeball ultraball = new Pokeball(
-                ultraballCenter,
-                pokeballRadius,
-                ultraballUpVector,
-                ultraballOutVector,
-                new ImageData("UltraBall.png"),
-                new ImageData("PokeballNormalMapTop.png"),
-                new ImageData("PokeballNormalMapBottom.png")
-                );
-            _shapes.Add(ultraball);
-            _intersectingShapes.Add(ultraball.Sphere);
-            _intersectingShapes.Add(ultraball.Dot);
-
-
-            Point masterballCenter = new Point(-400, pokeballY, -1200);
-            Vector masterballUpVector = new Vector(1, 4, 0);
-            Vector masterballOutVector = new Vector(3, -2, 6);
-            Pokeball masterball = new Pokeball(
-                masterballCenter,
-                pokeballRadius,
-                masterballUpVector,
-                masterballOutVector,
-                new ImageData("MasterBall.png"),
-                new ImageData("PokeballNormalMapTop.png"),
-                new ImageData("PokeballNormalMapBottom.png")
-                );
-            _shapes.Add(masterball);
-            _intersectingShapes.Add(masterball.Sphere);
-            _intersectingShapes.Add(masterball.Dot);
-
-            Point pokeballCenter = new Point(200, pokeballY, -400);
-            Vector pokeballUpVector = new Vector(-5, 1, 0);
-            Vector pokeballOutVector = new Vector(3, 0, 10);
-            Pokeball pokeball = new Pokeball(
-                pokeballCenter,
-                pokeballRadius,
-                pokeballUpVector,
-                pokeballOutVector,
-                new ImageData("MasterBall.png"),
-                new ImageData("PokeballNormalMapTop.png"),
-                new ImageData("PokeballNormalMapBottom.png"),
-                true
-                );
-            _shapes.Add(pokeball);
-            _intersectingShapes.Add(pokeball.Sphere);
-            _intersectingShapes.Add(pokeball.Dot);
-
-
-
-
-
-
+            sphere.SetColorMatrix(ColorMatrix.White());
+            _shapes.Add(sphere);
+            _intersectingShapes.Add(sphere);
 
 
 
@@ -220,22 +226,23 @@ namespace Project5
 
 
 
-            Point specularHighlightPoint = greatball.Sphere.Center + (pokeballPerpendicularVector + greatball.OutVector / 3 + 2 * greatball.UpVector).UnitVector() * greatball.Sphere.Radius * 4;
-            //specularHighlightPoint.Z += 700;
-            //Point specularHighlightPoint = new Point(500, 200, 100); // pokeball.Sphere.Center + (pokeballPerpendicularVector + pokeball.OutVector / 3 + 2 * pokeball.UpVector).UnitVector() * pokeball.Sphere.Radius * 4;
-            double specularHighlightIntensity = 30;
-            SpecularHighlight specularHighlight = new SpecularHighlight
-            {
-                Point = specularHighlightPoint,
-                LightColor = new Color(specularHighlightIntensity),
-                EyePoint = _camera.CameraPoint,
-                Minimum = Math.Cos(Function.Degrees(25)),
-                Maximum = Math.Cos(Function.Degrees(2))
-            };
-            //_lights.Add(specularHighlight);
+            //Point specularHighlightPoint = greatball.Sphere.Center + (pokeballPerpendicularVector + greatball.OutVector / 3 + 2 * greatball.UpVector).UnitVector() * greatball.Sphere.Radius * 4;
+            ////specularHighlightPoint.Z += 700;
+            ////Point specularHighlightPoint = new Point(500, 200, 100); // pokeball.Sphere.Center + (pokeballPerpendicularVector + pokeball.OutVector / 3 + 2 * pokeball.UpVector).UnitVector() * pokeball.Sphere.Radius * 4;
+            //double specularHighlightIntensity = 30;
+            //SpecularHighlight specularHighlight = new SpecularHighlight
+            //{
+            //    Point = specularHighlightPoint,
+            //    LightColor = new Color(specularHighlightIntensity),
+            //    EyePoint = _camera.CameraPoint,
+            //    Minimum = Math.Cos(Function.Degrees(25)),
+            //    Maximum = Math.Cos(Function.Degrees(2))
+            //};
+            ////_lights.Add(specularHighlight);
 
             //Point spotlightPoint = pokeballCenter + (pokeballPerpendicularVector + pokeball.UpVector * 2 + pokeball.OutVector * 2).UnitVector() * pokeballRadius * 1.5;
-            Point spotlightPoint = center + (greatball.OutVector).UnitVector() * pokeballRadius * 1.5;
+            //Point spotlightPoint = new Point(800, 800, 0);// center + (greatball.OutVector).UnitVector() * pokeballRadius * 1.5;
+            Point spotlightPoint = new Point(0, 0, 200);
             double spotLightIntensity = 20;
             SpotLight spotLight = new SpotLight
             {
@@ -247,27 +254,47 @@ namespace Project5
             };
             //_lights.Add(spotLight);
 
-            
-            Point planePoint = new Point(0, -600, -600);
-            Vector planeNormalVector = new Vector(0, 1, 0);
-            Vector planeUpVector = new Vector(0, 0, -1);
-            Plane plane = new Plane(
-                planePoint, 
-                planeNormalVector, 
-                planeUpVector, 
-                new ImageData("Wallpaper.png"),
-                new ImageData("NormalMap.png")
+            Projection projection = new Projection(
+                spotlightPoint,
+                (center - spotlightPoint).UnitVector(),
+                new Vector(0, 1, 0),
+                new ImageData("Margot.jpg"),
+                Function.Degrees(35),
+                100
                 );
-            plane.SetColorMatrix(ColorMatrix.Green());
-            _grass = plane;
+            _lights.Add(projection);
+
+
+            //Point planePoint = new Point(0, -600, -600);
+            //Vector planeNormalVector = new Vector(0, 1, 0);
+            //Vector planeUpVector = new Vector(0, 0, -1);
+            //Plane plane = new Plane(
+            //    planePoint, 
+            //    planeNormalVector, 
+            //    planeUpVector, 
+            //    new ImageData("Wallpaper.png"),
+            //    new ImageData("NormalMap.png")
+            //    );
+            //plane.SetColorMatrix(ColorMatrix.Green());
+            //_grass = plane;
+            //_shapes.Add(plane);
+            //_intersectingShapes.Add(plane);
+
+            //_sky = new Sky(
+            //    new Point(0, 0, -2000),
+            //    new Vector(0, 0, 1)
+            //    );
+            //_shapes.Add(_sky);
+
+            Point planePoint = new Point(0, 0, -2000);
+            Vector planeNormalVector = new Vector(0, 0, 1);
+            Plane plane = new Plane(
+                planePoint,
+                planeNormalVector
+                );
+            plane.SetColorMatrix(ColorMatrix.White());
             _shapes.Add(plane);
             _intersectingShapes.Add(plane);
-
-            _sky = new Sky(
-                new Point(0, 0, -2000),
-                new Vector(0, 0, 1)
-                );
-            _shapes.Add(_sky);
 
 
             _moveAmount = 300;
@@ -302,20 +329,20 @@ namespace Project5
                     pngBitmapEncoder.Save(file);
                 }
 
-                _pokeball.Evaluate();
+                //_pokeball.Evaluate();
             }
             else if(e.Key == Key.R)
             {
-                _pokeball.Texture.ReloadTexture();
-                _pokeball.NormalMapTop.ReloadTexture();
-                _pokeball.NormalMapBottom.ReloadTexture();
+                //_pokeball.Texture.ReloadTexture();
+                //_pokeball.NormalMapTop.ReloadTexture();
+                //_pokeball.NormalMapBottom.ReloadTexture();
                 Render();
             }
             else if(e.Key == Key.Space)
             {
                 //_grass.ToggleNormalMap();
                 //_sky.ToggleSky();
-                _sky.MakeSky();
+                //_sky.MakeSky();
                 Render();
             }
             else if(e.Key == Key.LeftShift)

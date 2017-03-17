@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace Project5
+namespace Project6
 {
     class Pokeball : Shape
     {

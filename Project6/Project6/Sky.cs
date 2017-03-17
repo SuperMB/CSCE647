@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project5
+namespace Project6
 {
     class Sky : Shape
     {
