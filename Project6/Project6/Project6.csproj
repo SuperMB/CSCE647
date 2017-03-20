@@ -51,6 +51,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Function3DSphere.cs" />
     <Compile Include="Perlin.cs" />
     <Compile Include="PerlinNoiseTexture.cs" />
     <Compile Include="PerlinOptions.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Screen.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="Sky.cs" />
+    <Compile Include="SolidTextureSphere.cs" />
     <Compile Include="SpecularHighlight.cs" />
     <Compile Include="Sphere.cs" />
     <Compile Include="SpotLight.cs" />

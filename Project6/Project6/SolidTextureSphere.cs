@@ -1,0 +1,116 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Project6
+{
+    class SolidTextureSphere : Shape
+    {
+        public SolidTextureSphere(Sphere sphere, Point planePoint, Vector planeUpVector, ImageData imageData)
+        {
+            Sphere = sphere;
+            sphere.SetColorMatrix(ColorMatrix.White());
+            Plane = new Plane(planePoint, (Sphere.Center - planePoint).UnitVector());
+            PlaneUpVector = planeUpVector.UnitVector();
+            ImageData = imageData;
+        }
+
+        public bool Inside(Point point)
+        {
+            return false;
+        }
+        public void SetColorMatrix(ColorMatrix colorMatrix)
+        {
+
+        }
+        public ColorMatrix GetColorMatrix(Point point)
+        {
+            return null;
+        }
+        public ColorMatrix GetColorMatrix(Point2D point)
+        {
+            ColorMatrix pixel = ImageData.GetPixel(point.X, point.Y);
+            return pixel;
+        }
+        private Point2D GetXY(Point point)
+        {
+            Vector vector = (point - Plane.Point);
+            Vector unitVector = vector.UnitVector();
+            double cosTheta = Function.DotProduct(unitVector, PlaneUpVector);
+            double theta = Math.Acos(cosTheta);
+            Vector perpendicularVector = Function.CrossProduct(PlaneUpVector, Plane.NormalVector);
+            double testTheta = Math.Acos(Function.DotProduct(unitVector, perpendicularVector));
+            if (testTheta < Function.Degrees(90))
+                theta = Function.Degrees(360) - theta;
+
+            int pixelX = 0;
+            int pixelY = 0;
+            double distance = vector.Length();
+            int imageWidth = ImageData.Width;
+            int imageHeight = ImageData.Height;
+            if (theta < Function.Degrees(90))
+            {
+                pixelX = (int)((imageWidth / 2 - Math.Sin(theta) * distance) % imageWidth);
+                pixelY = (int)((imageHeight / 2 - Math.Cos(theta) * distance) % imageHeight);
+            }
+            else if (theta < Function.Degrees(180))
+            {
+                pixelX = (int)((imageWidth / 2 - (Math.Sin(Function.Degrees(180) - theta) * distance) % imageWidth));
+                pixelY = (int)((imageHeight / 2 + (Math.Cos(Function.Degrees(180) - theta) * distance) % imageHeight));
+            }
+            else if (theta < Function.Degrees(270))
+            {
+                pixelX = (int)((imageWidth / 2 + (Math.Sin(theta - Function.Degrees(180)) * distance) % imageWidth));
+                pixelY = (int)((imageHeight / 2 + (Math.Cos(theta - Function.Degrees(180)) * distance) % imageHeight));
+            }
+            else if (theta < Function.Degrees(360))
+            {
+                pixelX = (int)((imageWidth / 2 + (Math.Sin(Function.Degrees(360) - theta) * distance) % imageWidth));
+                pixelY = (int)((imageHeight / 2 - (Math.Cos(Function.Degrees(360) - theta) * distance) % imageHeight));
+            }
+            //if (pixelX < 0 | pixelY < 0 | pixelX > imageWidth | pixelY > imageHeight)
+            //    return ColorMatrix;
+
+            //return ColorMatrix.None;
+            int pixelXOriginal = pixelX;
+            int pixelYOriginal = pixelY;
+            pixelX %= imageWidth;
+            pixelY %= imageHeight;
+            if (pixelX < 0)
+                pixelX += imageWidth;
+            if (pixelY < 0)
+                pixelY += imageHeight;
+
+            return new Point2D(pixelX, pixelY);
+        }
+        public ReturnData Intersection(Point point, Vector ray)
+        {
+            ReturnData returnData = Sphere.Intersection(point, ray, false);
+            if (returnData != null)
+            {
+                Vector direction = Plane.NormalVector * -1;
+                ReturnData planeIntersection = Plane.Intersection(returnData.Point, direction);
+                Point2D imageXY = GetXY(planeIntersection.Point);
+                returnData.ColorMatrix = GetColorMatrix(imageXY);
+
+                return returnData;
+            }
+            return null;
+            //returnData = Plane.Intersection(point, ray);
+            //imageXY = GetXY(returnData.Point);
+            //returnData.ColorMatrix = GetColorMatrix(imageXY);
+            //return returnData;
+        }
+        public ReturnData Outline(Point point, Vector ray)
+        {
+            return null;
+        }
+        
+        public Sphere Sphere { get; set; }
+        public Plane Plane { get; set; }
+        public Vector PlaneUpVector { get; set; }
+        public ImageData ImageData { get; set; }
+    }
+}

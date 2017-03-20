@@ -196,11 +196,25 @@ namespace Project6
                 300
                 );
             sphere.SetColorMatrix(ColorMatrix.White());
-            _shapes.Add(sphere);
-            _intersectingShapes.Add(sphere);
+            //_shapes.Add(sphere);
+            //_intersectingShapes.Add(sphere);
 
+            ImageData margot = new ImageData("Margot.jpg");
 
+            SolidTextureSphere solidTextureSphere = new SolidTextureSphere(
+                new Sphere(new Point(0, 0, -800), 300),
+                new Point(0, 0, -1300),
+                new Vector(0, 1, 0),
+                margot
+                );
+            _shapes.Add(solidTextureSphere);
+            _intersectingShapes.Add(solidTextureSphere.Sphere);
 
+            Function3DSphere function3DSphere = new Function3DSphere(
+                new Sphere(new Point(0, 0, -800), 300)
+                );
+            _shapes.Add(solidTextureSphere);
+            _intersectingShapes.Add(solidTextureSphere.Sphere);
 
 
 
@@ -258,11 +272,11 @@ namespace Project6
                 spotlightPoint,
                 (center - spotlightPoint).UnitVector(),
                 new Vector(0, 1, 0),
-                new ImageData("Margot.jpg"),
+                margot,
                 Function.Degrees(35),
                 100
                 );
-            _lights.Add(projection);
+            //_lights.Add(projection);
 
 
             //Point planePoint = new Point(0, -600, -600);
