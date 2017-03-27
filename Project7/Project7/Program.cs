@@ -9,7 +9,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace Project6
+namespace Project7
 {
     class Program
     {
@@ -17,17 +17,13 @@ namespace Project6
         static Window w;
         static Image image;
 
-        //static Screen screen;
-        //static Sphere sphere;
-        //static Plane plane;
-        //static Cylinder cylinder;
-
         static int _antiAliasX;
         static int _antiAliasY;
         static int _antiAliasXValues;
         static int _antiAliasYValues;
         static bool _antiAlias;
         static bool _illuminate;
+        static bool _multiThread;
 
         static List<Shape> _shapes;
         static List<Shape> _intersectingShapes;
@@ -87,11 +83,6 @@ namespace Project6
 
             image.MouseMove += new MouseEventHandler(i_MouseMove);
             w.KeyDown += KeyPress;
-            
-            //Point screenPoint = new Point(0, 0, 0);
-            //Vector vector0 = new Vector(1, 0, 0);
-            //Vector vector1 = new Vector(0, 1, 0);
-            //screen = new Screen(w.ActualWidth, w.ActualHeight, screenPoint, vector0, w.ActualWidth, vector1, w.ActualHeight);
 
             Point cameraPoint = new Point(0, 0, 1500);
             Vector viewVector = new Vector(0, 0, -1);
@@ -112,6 +103,32 @@ namespace Project6
             _antiAliasXValues = 1;// 4;
             _antiAliasYValues = 1;// 2;
             SetAntiAlias();
+
+            Tetrahedron tetrahedron = new Tetrahedron(
+                new Point(400, 200, -300),
+                400
+                );
+            //foreach (Triangle triangle in tetrahedron.Triangles)
+            //    _intersectingShapes.Add(triangle);
+            //_shapes.Add(tetrahedron);
+
+            Cube cube = new Cube(
+                new Point(300, -200, 400),
+                new Vector(0, 1, 0),
+                new Vector(1, -1, 3),
+                //new Vector(1, 0, 0),
+                300);
+            foreach (Triangle triangle in cube.Triangles)
+                _intersectingShapes.Add(triangle);
+            _shapes.Add(cube);
+
+            //Triangle triangle = new Triangle(
+            //    new Point(0, 0, -650),
+            //    new Point(0, 800, -500),
+            //    new Point(800, 0, -400)
+            //    );
+            //_shapes.Add(triangle);
+            //_intersectingShapes.Add(triangle);
 
             //double pokeballRadius = 150;
             //double pokeballY = -450;
@@ -190,131 +207,16 @@ namespace Project6
 
 
 
-            Point center = new Point(0, 0, -500);
-            Sphere sphere = new Sphere(
-                center,
-                300
-                );
-            sphere.SetColorMatrix(ColorMatrix.White());
-            //_shapes.Add(sphere);
-            //_intersectingShapes.Add(sphere);
-
-            ImageData ocean = new ImageData("Ocean.jpg");
-            ImageData fire = new ImageData("Fire.jpg");
-
-            //Point solidTexturePoint = new Point(600, -800, -800);
-            //double solidTextureRadius = 700;
-            //SolidTextureSphere solidTextureSphere = new SolidTextureSphere(
-            //    new Sphere(solidTexturePoint, solidTextureRadius),
-            //    solidTexturePoint + ((solidTexturePoint - cameraPoint).UnitVector() + new Vector(2, 0, 0)).UnitVector() * solidTextureRadius * 2,
-            //    new Vector(0, 1, 0),
-            //    ocean
-            //    );
-            //_shapes.Add(solidTextureSphere);
-            //_intersectingShapes.Add(solidTextureSphere.Sphere);
-
-            Point solidTexturePoint = new Point(500, 0, -800);
-            double solidTextureRadius = 700;
-            SolidTextureSphere solidTextureSphere = new SolidTextureSphere(
-                new Sphere(solidTexturePoint, solidTextureRadius),
-                solidTexturePoint + ((solidTexturePoint - cameraPoint).UnitVector()).UnitVector() * solidTextureRadius * 2,
-                new Vector(0, 1, 0),
-                ocean
-                );
-            _shapes.Add(solidTextureSphere);
-            _intersectingShapes.Add(solidTextureSphere.Sphere);
-
-
-            Function3DSphere function3DSphere = new Function3DSphere(
-                new Sphere(new Point(-700, 900, -800), 600)
-                );
-            _shapes.Add(function3DSphere);
-            _intersectingShapes.Add(function3DSphere.Sphere);
-
-
 
             double diffusedLightIntensity = 3;
             DiffusedLight diffusedLight = new DiffusedLight
             {
-                Point = new Point(0, 0, 300),
+                Point = new Point(-300, 600, 300),
                 LightColor = new Color(diffusedLightIntensity)
             };
             _lights.Add(diffusedLight);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //Point specularHighlightPoint = greatball.Sphere.Center + (pokeballPerpendicularVector + greatball.OutVector / 3 + 2 * greatball.UpVector).UnitVector() * greatball.Sphere.Radius * 4;
-            ////specularHighlightPoint.Z += 700;
-            ////Point specularHighlightPoint = new Point(500, 200, 100); // pokeball.Sphere.Center + (pokeballPerpendicularVector + pokeball.OutVector / 3 + 2 * pokeball.UpVector).UnitVector() * pokeball.Sphere.Radius * 4;
-            //double specularHighlightIntensity = 30;
-            //SpecularHighlight specularHighlight = new SpecularHighlight
-            //{
-            //    Point = specularHighlightPoint,
-            //    LightColor = new Color(specularHighlightIntensity),
-            //    EyePoint = _camera.CameraPoint,
-            //    Minimum = Math.Cos(Function.Degrees(25)),
-            //    Maximum = Math.Cos(Function.Degrees(2))
-            //};
-            ////_lights.Add(specularHighlight);
-
-            //Point spotlightPoint = pokeballCenter + (pokeballPerpendicularVector + pokeball.UpVector * 2 + pokeball.OutVector * 2).UnitVector() * pokeballRadius * 1.5;
-            //Point spotlightPoint = new Point(800, 800, 0);// center + (greatball.OutVector).UnitVector() * pokeballRadius * 1.5;
-            Point spotlightPoint = new Point(1100, -1000, 200);
-            double spotLightIntensity = 20;
-            SpotLight spotLight = new SpotLight
-            {
-                Point = spotlightPoint,
-                Direction = (center - spotlightPoint).UnitVector(),
-                LightColor = new Color(spotLightIntensity),
-                Angle = Function.Degrees(35),
-                Buffer = Function.Degrees(15)
-            };
-            //_lights.Add(spotLight);
-
-            Point projectionPoint = new Point(-1000, -1000, 1200);
-            Projection projection = new Projection(
-                projectionPoint,
-                new Vector(1,1,-2),
-                new Vector(0, 1, 0),
-                fire,
-                Function.Degrees(35),
-                100
-                );
-            _lights.Add(projection);
-
-
-            //Point planePoint = new Point(0, -600, -600);
-            //Vector planeNormalVector = new Vector(0, 1, 0);
-            //Vector planeUpVector = new Vector(0, 0, -1);
-            //Plane plane = new Plane(
-            //    planePoint, 
-            //    planeNormalVector, 
-            //    planeUpVector, 
-            //    new ImageData("Wallpaper.png"),
-            //    new ImageData("NormalMap.png")
-            //    );
-            //plane.SetColorMatrix(ColorMatrix.Green());
-            //_grass = plane;
-            //_shapes.Add(plane);
-            //_intersectingShapes.Add(plane);
-
-            //_sky = new Sky(
-            //    new Point(0, 0, -2000),
-            //    new Vector(0, 0, 1)
-            //    );
-            //_shapes.Add(_sky);
 
             Point planePoint = new Point(0, 0, -900);
             Vector planeNormalVector = new Vector(0, 0, 1);
@@ -326,6 +228,7 @@ namespace Project6
             _shapes.Add(plane);
             _intersectingShapes.Add(plane);
 
+            _multiThread = true;
 
             _moveAmount = 300;
             Application app = new Application();
@@ -437,8 +340,13 @@ namespace Project6
             Thread thread = new Thread(new ThreadStart(() =>
             {
                 List<Thread> threads = new List<Thread>();
-                int xSubSections = 4;
-                int ySubSections = 2;
+                int xSubSections = 1;
+                int ySubSections = 1;
+                if (_multiThread)
+                {
+                    xSubSections = 4;
+                    ySubSections = 2;
+                }
                 int xWidth = _camera.Screen.Pixels.Length / xSubSections;
                 int yWidth = _camera.Screen.Pixels[0].Length / ySubSections;
                 for (int i = 0; i < xSubSections; i++)
@@ -590,3 +498,103 @@ namespace Project6
         //}
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Point specularHighlightPoint = greatball.Sphere.Center + (pokeballPerpendicularVector + greatball.OutVector / 3 + 2 * greatball.UpVector).UnitVector() * greatball.Sphere.Radius * 4;
+////specularHighlightPoint.Z += 700;
+////Point specularHighlightPoint = new Point(500, 200, 100); // pokeball.Sphere.Center + (pokeballPerpendicularVector + pokeball.OutVector / 3 + 2 * pokeball.UpVector).UnitVector() * pokeball.Sphere.Radius * 4;
+//double specularHighlightIntensity = 30;
+//SpecularHighlight specularHighlight = new SpecularHighlight
+//{
+//    Point = specularHighlightPoint,
+//    LightColor = new Color(specularHighlightIntensity),
+//    EyePoint = _camera.CameraPoint,
+//    Minimum = Math.Cos(Function.Degrees(25)),
+//    Maximum = Math.Cos(Function.Degrees(2))
+//};
+////_lights.Add(specularHighlight);
+
+//Point spotlightPoint = pokeballCenter + (pokeballPerpendicularVector + pokeball.UpVector * 2 + pokeball.OutVector * 2).UnitVector() * pokeballRadius * 1.5;
+//Point spotlightPoint = new Point(800, 800, 0);// center + (greatball.OutVector).UnitVector() * pokeballRadius * 1.5;
+//Point spotlightPoint = new Point(1100, -1000, 200);
+//double spotLightIntensity = 20;
+//SpotLight spotLight = new SpotLight
+//{
+//    Point = spotlightPoint,
+//    Direction = (center - spotlightPoint).UnitVector(),
+//    LightColor = new Color(spotLightIntensity),
+//    Angle = Function.Degrees(35),
+//    Buffer = Function.Degrees(15)
+//};
+//_lights.Add(spotLight);
+
+//Point projectionPoint = new Point(-1000, -1000, 1200);
+//Projection projection = new Projection(
+//    projectionPoint,
+//    new Vector(1,1,-2),
+//    new Vector(0, 1, 0),
+//    fire,
+//    Function.Degrees(35),
+//    100
+//    );
+//_lights.Add(projection);
+
+
+//Point planePoint = new Point(0, -600, -600);
+//Vector planeNormalVector = new Vector(0, 1, 0);
+//Vector planeUpVector = new Vector(0, 0, -1);
+//Plane plane = new Plane(
+//    planePoint, 
+//    planeNormalVector, 
+//    planeUpVector, 
+//    new ImageData("Wallpaper.png"),
+//    new ImageData("NormalMap.png")
+//    );
+//plane.SetColorMatrix(ColorMatrix.Green());
+//_grass = plane;
+//_shapes.Add(plane);
+//_intersectingShapes.Add(plane);
+
+//_sky = new Sky(
+//    new Point(0, 0, -2000),
+//    new Vector(0, 0, 1)
+//    );
+//_shapes.Add(_sky);
+
+
+
+//ImageData ocean = new ImageData("Ocean.jpg");
+//ImageData fire = new ImageData("Fire.jpg");
+
+//Point solidTexturePoint = new Point(500, 0, -800);
+//double solidTextureRadius = 700;
+//SolidTextureSphere solidTextureSphere = new SolidTextureSphere(
+//    new Sphere(solidTexturePoint, solidTextureRadius),
+//    solidTexturePoint + ((solidTexturePoint - cameraPoint).UnitVector()).UnitVector() * solidTextureRadius * 2,
+//    new Vector(0, 1, 0),
+//    ocean
+//    );
+//_shapes.Add(solidTextureSphere);
+//_intersectingShapes.Add(solidTextureSphere.Sphere);
+
+
+//Function3DSphere function3DSphere = new Function3DSphere(
+//    new Sphere(new Point(-700, 900, -800), 600)
+//    );
+//_shapes.Add(function3DSphere);
+//_intersectingShapes.Add(function3DSphere.Sphere);

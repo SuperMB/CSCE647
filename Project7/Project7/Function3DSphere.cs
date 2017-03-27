@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project6
+namespace Project7
 {
     class Function3DSphere : Shape
     {
