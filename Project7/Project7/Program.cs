@@ -122,6 +122,13 @@ namespace Project7
                 _intersectingShapes.Add(triangle);
             _shapes.Add(cube);
 
+            List<Triangle> triangles = ObjReader.ReadObjFile("Data.obj");
+            foreach (Triangle triangle in triangles)
+            {
+                //_intersectingShapes.Add(triangle);
+                //_shapes.Add(triangle);
+            }
+
             //Triangle triangle = new Triangle(
             //    new Point(0, 0, -650),
             //    new Point(0, 800, -500),

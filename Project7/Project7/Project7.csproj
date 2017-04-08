@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Cube.cs" />
     <Compile Include="Function3DSphere.cs" />
+    <Compile Include="ObjReader.cs" />
     <Compile Include="Perlin.cs" />
     <Compile Include="PerlinNoiseTexture.cs" />
     <Compile Include="PerlinOptions.cs" />

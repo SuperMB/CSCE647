@@ -4,3 +4,9 @@ F:\Code\GitHub\CSCE647\Project7\Project7\obj\Debug\Project2.pdb
 F:\Code\GitHub\CSCE647\Project7\Project7\bin\Debug\Project2.exe
 F:\Code\GitHub\CSCE647\Project7\Project7\bin\Debug\Project2.pdb
 F:\Code\GitHub\CSCE647\Project7\Project7\obj\Debug\Project7.csprojResolveAssemblyReference.cache
+C:\Users\littl\Code\GitHub\CSCE647\Project7\Project7\bin\Debug\Project2.exe.config
+C:\Users\littl\Code\GitHub\CSCE647\Project7\Project7\obj\Debug\Project2.exe
+C:\Users\littl\Code\GitHub\CSCE647\Project7\Project7\obj\Debug\Project2.pdb
+C:\Users\littl\Code\GitHub\CSCE647\Project7\Project7\bin\Debug\Project2.exe
+C:\Users\littl\Code\GitHub\CSCE647\Project7\Project7\bin\Debug\Project2.pdb
+C:\Users\littl\Code\GitHub\CSCE647\Project7\Project7\obj\Debug\Project7.csprojResolveAssemblyReference.cache

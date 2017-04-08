@@ -30,7 +30,7 @@ namespace Project7
             double shadowFromAngle = Shadow(angle);
             double shadowFromIntersection = Function.IntersectionShadow(data, vectorToLight, shapes, _minAngle, _maxAngle);
             double shadow = Math.Min(shadowFromAngle, shadowFromIntersection);
-            shadow = 1;
+            //shadow = 1;
 
             intensity *= (shadow + alpha) / (1 + alpha);
             if (intensity > _maxIntensity)
