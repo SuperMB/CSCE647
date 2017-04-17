@@ -1,0 +1,12 @@
+C:\Users\littl\Code\GitHub\CSCE647\Project2\Project2\bin\Debug\Project2.exe.config
+C:\Users\littl\Code\GitHub\CSCE647\Project2\Project2\bin\Debug\Project2.exe
+C:\Users\littl\Code\GitHub\CSCE647\Project2\Project2\bin\Debug\Project2.pdb
+C:\Users\littl\Code\GitHub\CSCE647\Project2\Project2\obj\Debug\Project2.csprojResolveAssemblyReference.cache
+C:\Users\littl\Code\GitHub\CSCE647\Project2\Project2\obj\Debug\Project2.exe
+C:\Users\littl\Code\GitHub\CSCE647\Project2\Project2\obj\Debug\Project2.pdb
+F:\Downloads\Project3\Project2\Project2\obj\Debug\Project2.csprojResolveAssemblyReference.cache
+F:\Downloads\Project3\Project2\Project2\bin\Debug\Project2.exe.config
+F:\Downloads\Project3\Project2\Project2\bin\Debug\Project2.exe
+F:\Downloads\Project3\Project2\Project2\bin\Debug\Project2.pdb
+F:\Downloads\Project3\Project2\Project2\obj\Debug\Project2.exe
+F:\Downloads\Project3\Project2\Project2\obj\Debug\Project2.pdb
