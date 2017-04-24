@@ -233,25 +233,7 @@ namespace Project10
 
             return null;
         }
-
-        public static ReturnData Gloss(double glossAmount, Point point, Vector ray, Vector normalVector, List<Shape> shapes, List<Shape> originalShapes)
-        {
-            Vector reflectedVector = (ray - 2 * Function.DotProduct(ray, normalVector) * normalVector).UnitVector();
-            reflectedVector = (reflectedVector + new Vector(_random.NextDouble() % glossAmount, _random.NextDouble() % glossAmount, _random.NextDouble() % glossAmount)).UnitVector();
-
-            List<ReturnData> intersectionPoints = Function.IntersectionPoints(point, reflectedVector, shapes, originalShapes);
-
-            int closestIndex = Function.Closest(intersectionPoints, point);
-            if (closestIndex >= 0)
-            {
-                ReturnData returnData = intersectionPoints[closestIndex];
-                //returnData.LightPoint = returnData.Point;
-                return returnData;
-            }
-
-            return null;
-        }
-
+        
         public static ReturnData RefractNormalMap(double refractiveIndex, Point point, Vector ray, Vector originalNormal, Vector normalVector, List<Shape> shapes, List<Shape> originalShapes)
         {
             ray = (ray * -1).UnitVector();
@@ -336,36 +318,48 @@ namespace Project10
             return null;
         }
 
-
-        public static ReturnData Translucent(double translucentAmount, Point point, Vector ray, List<Shape> shapes, List<Shape> originalShapes)
+        public static ReturnData Gloss(double glossAmount, Point point, Vector ray, Vector normalVector, List<Shape> shapes, List<Shape> originalShapes)
         {
+            Vector reflectedVector = (ray - 2 * Function.DotProduct(ray, normalVector) * normalVector).UnitVector();
+            return Translucent(.2, point, reflectedVector, shapes, originalShapes, null);
+        }
+
+        public static ReturnData Translucent(double translucentAmount, Point point, Vector ray, List<Shape> shapes, List<Shape> originalShapes, Vector direction)
+        {
+            translucentAmount = .2;
             Color color = new Color(0, 0, 0, 0);
-            int numberOfRuns = 4;
+            int numberOfRuns = 150;
             ReturnData returnData = null;
             //Vector transmitted = (ray).UnitVector();
-            Vector transmitted = (ray + ((new Vector(_random.NextDouble(), _random.NextDouble(), _random.NextDouble())).UnitVector() * translucentAmount)).UnitVector();
 
-            //for (int i = 0; i < numberOfRuns; i++)
-            //{
-            //    double x = i == 0 ? 1 : 0;
-            //    double y = i == 1 ? 1 : 0;
-            //    double z = i == 2 ? 1 : 0;
-            //    Point newPoint = point + new Vector(x, y, z);
-            List<ReturnData> intersectionPoints = Function.IntersectionPoints(point, transmitted, shapes, originalShapes);
+            int matchedRuns = 0;
+
+            for (int i = 0; i < numberOfRuns; i++)
+            {
+                Vector transmitted = (ray + ((new Vector(_random.NextDouble(), _random.NextDouble(), _random.NextDouble())).UnitVector() * translucentAmount)).UnitVector();
+                List<ReturnData> intersectionPoints = Function.IntersectionPoints(point, transmitted, shapes, originalShapes);
 
                 int closestIndex = Function.Closest(intersectionPoints, point);
                 if (closestIndex >= 0)
                 {
                     returnData = intersectionPoints[closestIndex];
-                    //color = color + returnData.Color;
+                    color = color + returnData.Color;
+                    matchedRuns++;
                 }
-            //}
+            }
 
-            if(returnData != null)
+            if (returnData != null)
             {
+                color /= matchedRuns;
+                //color.Omega = 1;
+                color.Omega /= matchedRuns;
+
+                color.IgnoreEffects = returnData.Color.IgnoreEffects;
+                returnData.Color = color;
                 return returnData;
             }
-            return null;
+            else
+                return null;
         }
 
         public static Color Illuminate(ReturnData returnData)

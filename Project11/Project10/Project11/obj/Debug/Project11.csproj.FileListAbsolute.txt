@@ -1,0 +1,6 @@
+F:\Code\GitHub\CSCE647\Project11\Project10\Project11\bin\Debug\Project2.exe.config
+F:\Code\GitHub\CSCE647\Project11\Project10\Project11\obj\Debug\Project2.exe
+F:\Code\GitHub\CSCE647\Project11\Project10\Project11\obj\Debug\Project2.pdb
+F:\Code\GitHub\CSCE647\Project11\Project10\Project11\obj\Debug\Project11.csprojResolveAssemblyReference.cache
+F:\Code\GitHub\CSCE647\Project11\Project10\Project11\bin\Debug\Project2.exe
+F:\Code\GitHub\CSCE647\Project11\Project10\Project11\bin\Debug\Project2.pdb

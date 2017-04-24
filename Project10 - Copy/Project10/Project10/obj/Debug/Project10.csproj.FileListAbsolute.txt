@@ -1,0 +1,9 @@
+C:\Users\littl\Code\GitHub\CSCE647\Project10\Project10\Project10\bin\Debug\Project2.exe.config
+C:\Users\littl\Code\GitHub\CSCE647\Project10\Project10\Project10\obj\Debug\Project2.exe
+C:\Users\littl\Code\GitHub\CSCE647\Project10\Project10\Project10\obj\Debug\Project2.pdb
+C:\Users\littl\Code\GitHub\CSCE647\Project10\Project10\Project10\bin\Debug\Project2.exe
+C:\Users\littl\Code\GitHub\CSCE647\Project10\Project10\Project10\bin\Debug\Project2.pdb
+C:\Users\littl\Code\GitHub\CSCE647\Project10\Project10\Project10\obj\Debug\Project10.csprojResolveAssemblyReference.cache
+F:\Code\GitHub\CSCE647\Project10 - Copy\Project10\Project10\bin\Debug\Project2.exe.config
+F:\Code\GitHub\CSCE647\Project10 - Copy\Project10\Project10\obj\Debug\Project2.exe
+F:\Code\GitHub\CSCE647\Project10 - Copy\Project10\Project10\obj\Debug\Project2.pdb

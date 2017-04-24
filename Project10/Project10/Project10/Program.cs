@@ -254,12 +254,12 @@ namespace Project10
                 Smooth,
                 _shapes
                 );
-            _shapes.Add(glossyPokeball);
-            _intersectingShapes.Add(glossyPokeball.Sphere);
-            _intersectingShapes.Add(glossyPokeball.Dot);
+            //_shapes.Add(glossyPokeball);
+            //_intersectingShapes.Add(glossyPokeball.Sphere);
+            //_intersectingShapes.Add(glossyPokeball.Dot);
 
 
-            Point pokeballCenter = new Point(-700, -700, -1275);
+            Point pokeballCenter = new Point(-900, -700, -1275);
             Vector pokeballUpVector = new Vector(0, 1, 0);
             Pokeball pokeball = new Pokeball(
                 pokeballCenter,
@@ -312,8 +312,8 @@ namespace Project10
                 new Point(-500, 1000, -900),
                 _shapes
                 );
-            _shapes.Add(translucentSquare);
-            _intersectingShapes.Add(translucentSquare);
+            //_shapes.Add(translucentSquare);
+            //_intersectingShapes.Add(translucentSquare);
             //_refractiveSphere = refractiveSphere;
 
             ImageData SkyTexture = new ImageData();
@@ -333,7 +333,7 @@ namespace Project10
             double diffusedLightIntensity = 6;
             DiffusedLight diffusedLight = new DiffusedLight
             {
-                Point = new Point(0, 100, 100),
+                Point = new Point(0, 400, 400),
                 LightColor = new Color(diffusedLightIntensity)
             };
             _lights.Add(diffusedLight);
@@ -384,7 +384,7 @@ namespace Project10
             //_shapes.Add(rightPlane);
             //_intersectingShapes.Add(rightPlane);
 
-            _multiThread = true;
+            _multiThread = false;
 
             _moveAmount = 300;
 
@@ -417,7 +417,7 @@ namespace Project10
             Thread thread = new Thread(new ThreadStart(() =>
             {
                 _pokeball.Direction = new Vector(10, 0, 0);
-                int numberOfFrames = 1;
+                int numberOfFrames = 25;
                 for (int i = 0; i < numberOfFrames; i++)
                 {
                     if (i > 0)
@@ -431,6 +431,15 @@ namespace Project10
                     //Thread.Sleep(1000);
                 }
                 Application.Current.Dispatcher.Invoke(UpdateImage);
+                Thread.Sleep(500);
+                Application.Current.Dispatcher.Invoke( () => {
+                    using (FileStream file = new FileStream("image.png", FileMode.Create))
+                    {
+                        PngBitmapEncoder pngBitmapEncoder = new PngBitmapEncoder();
+                        pngBitmapEncoder.Frames.Add(BitmapFrame.Create(writeableBitmap));
+                        pngBitmapEncoder.Save(file);
+                    }
+                });
             }));
             //Thread.Sleep(2000);
             thread.Start();
@@ -443,13 +452,6 @@ namespace Project10
                 //_refractiveSphere.RefractiveIndexData = new ImageData("RefractiveIndex.png");
                 //Render();
                 Animate();
-                //Thread.Sleep(1000);
-                //using (FileStream file = new FileStream("image.png", FileMode.Create))
-                //{
-                //    PngBitmapEncoder pngBitmapEncoder = new PngBitmapEncoder();
-                //    pngBitmapEncoder.Frames.Add(BitmapFrame.Create(writeableBitmap));
-                //    pngBitmapEncoder.Save(file);
-                //}
 
                 //_pokeball.Evaluate();
             }
@@ -586,8 +588,8 @@ namespace Project10
                         }
                     }
 
-                    color /= _antiAliasX * _antiAliasY;
-                    color.Omega /= _antiAliasX * _antiAliasY;
+                    //color /= _antiAliasX * _antiAliasY;
+                    //color.Omega /= _antiAliasX * _antiAliasY;
                     if (color.Omega > 0)
                         _camera.CurrentScreen.SetPixel(i, j, color);
                     else
